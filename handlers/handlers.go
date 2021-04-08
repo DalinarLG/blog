@@ -17,6 +17,7 @@ func  Handlers(){
 
 	r.HandleFunc("/insertuser", middlewares.CheckDB(routers.InsertUser)).Methods("POST")
 	r.HandleFunc("/loginuser", middlewares.CheckDB(routers.LoginUser)).Methods("POST")
+	r.HandleFunc("/updateuser", middlewares.CheckDB(middlewares.ValidateToken(routers.UpdateUser))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == ""{

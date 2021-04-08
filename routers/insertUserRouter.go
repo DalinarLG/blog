@@ -11,6 +11,7 @@ import (
 )
 
 func InsertUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
 	var user models.User
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {

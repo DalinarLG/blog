@@ -3,27 +3,25 @@ package db
 import (
 	"log"
 
-	"github.com/DalinarLG/blog/models")
+	"github.com/DalinarLG/blog/models"
+)
 
+func CheckEmail(email string) (models.User, bool, error) {
 
-func CheckEmail(email string)(models.User, bool, error){
-	
 	var user models.User
 
-	stmt, err := DB.Prepare("select id, name, email, avatar from user where email=? ")
+	stmt, err := DB.Prepare("select id, name, email, password, avatar from user where email=? ")
 	if err != nil {
-		log.Println("Error fetching data stmt "+err.Error())
+		log.Println("Error fetching data stmt " + err.Error())
 		return user, false, err
 	}
 	defer stmt.Close()
 
-	err = stmt.QueryRow(email).Scan(&user.ID, &user.Name, &user.Email,  &user.Avatar)
+	err = stmt.QueryRow(email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.Avatar)
 	if err != nil {
-		log.Println("Error fetching data query "+err.Error())
+		log.Println("Error fetching data query " + err.Error())
 		return user, false, err
 	}
-
-	
 
 	return user, true, nil
 

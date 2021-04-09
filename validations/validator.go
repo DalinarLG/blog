@@ -15,3 +15,5 @@ func ValidateEmail(email string) bool {
 	return valid
 
 }
+
+

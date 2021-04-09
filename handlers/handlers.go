@@ -10,18 +10,18 @@ import (
 	"github.com/rs/cors"
 )
 
-
-
-func  Handlers(){
+func Handlers() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/insertuser", middlewares.CheckDB(routers.InsertUser)).Methods("POST")
 	r.HandleFunc("/loginuser", middlewares.CheckDB(routers.LoginUser)).Methods("POST")
 	r.HandleFunc("/updateuser", middlewares.CheckDB(middlewares.ValidateToken(routers.UpdateUser))).Methods("PUT")
 	r.HandleFunc("/uploadavatar", middlewares.CheckDB(middlewares.ValidateToken(routers.UploadAvatar))).Methods("PUT")
+	r.HandleFunc("/insertcategory", middlewares.CheckDB(middlewares.ValidateToken(routers.InsertCategory))).Methods("POST")
+	r.HandleFunc("/deletecategory", middlewares.CheckDB(middlewares.ValidateToken(routers.DeleteCategory))).Methods("DELETE")
 
 	PORT := os.Getenv("PORT")
-	if PORT == ""{
+	if PORT == "" {
 		PORT = "8080"
 	}
 

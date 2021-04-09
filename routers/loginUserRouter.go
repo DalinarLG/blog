@@ -62,7 +62,7 @@ func LoginUser(w http.ResponseWriter, r *http.Request){
 	http.SetCookie(w, &http.Cookie{
 		Value: token,
 		Name: "token",
-		Expires: time.Now().Add(24*time.Second),
+		Expires: time.Now().Add(24*time.Hour),
 	})
 
 }

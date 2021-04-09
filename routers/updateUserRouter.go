@@ -20,10 +20,10 @@ func UpdateUser( w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	if len(user.Name) == 0{
+	/*if len(user.Name) == 0{
 		http.Error(w, "name is required", 400)
 		return
-	}
+	}*/
 
 	user.Name = template.HTMLEscapeString(user.Name)
 

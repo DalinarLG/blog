@@ -62,6 +62,11 @@ func InsertUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = validations.SendEmail(user.Email)
+	if err != nil {
+		http.Error(w, "Could not send email", 400)		
+	}
+
 	w.Header().Set("content-type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }

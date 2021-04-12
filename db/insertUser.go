@@ -17,7 +17,7 @@ func InsertUser(u models.User)(bool, error ){
 	u.Password = Encrypt(u.Password)
 	_, err = stmt.Exec(u.Name, u.Email, u.Password, u.Avatar)
 	if err != nil {
-		log.Println(err.Error())
+		//log.Println(err.Error())
 		return false, err
 	}
 

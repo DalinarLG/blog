@@ -19,6 +19,8 @@ func Handlers() {
 	r.HandleFunc("/uploadavatar", middlewares.CheckDB(middlewares.ValidateToken(routers.UploadAvatar))).Methods("PUT")
 	r.HandleFunc("/insertcategory", middlewares.CheckDB(middlewares.ValidateToken(routers.InsertCategory))).Methods("POST")
 	r.HandleFunc("/deletecategory", middlewares.CheckDB(middlewares.ValidateToken(routers.DeleteCategory))).Methods("DELETE")
+	r.HandleFunc("/getcategories", middlewares.CheckDB(middlewares.ValidateToken(routers.GetCategories))).Methods("GET")
+	r.HandleFunc("/updatecategory", middlewares.CheckDB(middlewares.ValidateToken(routers.UpdateCategory))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

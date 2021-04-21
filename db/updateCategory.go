@@ -6,9 +6,9 @@ import (
 )
 
 
-func UpdateCategory(cat models.Category)(bool, error){
+func UpdateCategory(cat models.Category, id int)(bool, error){
 
-	stmt, err := DB.Prepare("update category set name = ?, description=? where id =?")
+	stmt, err := DB.Prepare("update category set name = ?, description=? where id_category =?")
 	if err != nil {
 		log.Println(err.Error())
 		return false, err
@@ -16,7 +16,7 @@ func UpdateCategory(cat models.Category)(bool, error){
 
 	defer stmt.Close()
 
-	_, err = stmt.Exec(cat.Name, cat.Description, cat.ID_Category)
+	_, err = stmt.Exec(cat.Name, cat.Description, id)
 	if err != nil {
 		log.Println(err.Error())
 		return false, err

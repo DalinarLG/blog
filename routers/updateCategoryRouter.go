@@ -2,7 +2,8 @@ package routers
 
 import (
 	"encoding/json"
-	"net/http"	
+	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/DalinarLG/blog/db"
@@ -20,10 +21,12 @@ func UpdateCategory(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
+	id := r.URL.Query().Get("id_category")
+	id_Category,_ := strconv.Atoi(id)	
 	cat.Name = template.HTMLEscapeString(cat.Name)
 	cat.Description = template.HTMLEscapeString(cat.Description)
 
-	status, err := db.UpdateCategory(cat)
+	status, err := db.UpdateCategory(cat, id_Category)
 	if err != nil {
 		http.Error(w, "Error updating category "+err.Error(), 400 )
 		return
